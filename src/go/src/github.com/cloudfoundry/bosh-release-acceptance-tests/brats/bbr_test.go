@@ -17,7 +17,7 @@ import (
 	"github.com/onsi/gomega/gexec"
 )
 
-var _ = Describe("Bosh Backup and Restore BBR", func() {
+var _ = XDescribe("Bosh Backup and Restore BBR", func() {
 	var (
 		backupDir             []string
 		startInnerBoshOptions []string
