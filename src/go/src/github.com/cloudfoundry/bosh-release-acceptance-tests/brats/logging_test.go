@@ -14,10 +14,6 @@ var _ = Describe("logging", func() {
 		startInnerBosh()
 	})
 
-	AfterEach(func() {
-		stopInnerBosh()
-	})
-
 	It("does not log credentials to the debug logs of director and workers", func() {
 		configPath := assetPath("cpi-config.yml")
 		redactable := "password: c1oudc0w"

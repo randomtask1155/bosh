@@ -34,10 +34,6 @@ var _ = Describe("Blobstore", func() {
 			Eventually(session, 3*time.Minute).Should(gexec.Exit(errorCode))
 		}
 
-		AfterEach(func() {
-			stopInnerBosh()
-		})
-
 		DescribeTable("with allow_http true", testDeployment,
 			Entry("allows http connections", true, "http", 0),
 			Entry("allows https connections", true, "https", 0),
@@ -63,10 +59,6 @@ var _ = Describe("Blobstore", func() {
 
 			session := outerBosh("-d", "bosh", "scp", fmt.Sprintf("bosh:%s", BLOBSTORE_ACCESS_LOG), tempBlobstoreDir)
 			Eventually(session, time.Minute).Should(gexec.Exit(0))
-		})
-
-		AfterEach(func() {
-			stopInnerBosh()
 		})
 
 		It("Should log in correct format", func() {

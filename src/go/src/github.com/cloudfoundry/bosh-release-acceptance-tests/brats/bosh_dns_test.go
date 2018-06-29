@@ -75,10 +75,6 @@ var _ = Describe("BoshDns", func() {
 		linkedTemplateReleasePath = assetPath("linked-templates-release")
 	})
 
-	AfterEach(func() {
-		stopInnerBosh()
-	})
-
 	Context("having enabled short dns addresses", func() {
 		BeforeEach(func() {
 			opFilePath := assetPath("op-enable-short-dns-addresses.yml")

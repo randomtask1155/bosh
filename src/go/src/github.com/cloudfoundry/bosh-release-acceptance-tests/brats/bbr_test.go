@@ -36,7 +36,6 @@ var _ = Describe("Bosh Backup and Restore BBR", func() {
 			err := os.RemoveAll(dir)
 			Expect(err).ToNot(HaveOccurred())
 		}
-		stopInnerBosh()
 	})
 
 	Context("database backup", func() {
