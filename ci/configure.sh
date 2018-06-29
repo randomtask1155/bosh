@@ -2,7 +2,7 @@
 
 set -eu
 
-fly -t production set-pipeline -p bosh-wip-faster-brats \
+fly -t production set-pipeline -p bosh \
     -c ci/pipeline.yml \
     --load-vars-from <(lpass show -G "bosh concourse secrets" --notes) \
     -l <(lpass show --note "bats-concourse-pool:vsphere secrets") \
