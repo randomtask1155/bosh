@@ -11,15 +11,15 @@ src_dir="${script_dir}/../../../"
 default_stemcell_path="${src_dir}/../stemcell/*.tgz"
 stemcell="${CANDIDATE_STEMCELL_TARBALL_PATH:-$default_stemcell_path}"
 
-pushd "${bosh_path}" > /dev/null
-  if [[ ! -e $(find . -maxdepth 1 -name "*.tgz") ]]; then
-    bosh create-release --tarball release.tgz
-  fi
+# pushd "${bosh_path}" > /dev/null
+#   if [[ ! -e $(find . -maxdepth 1 -name "*.tgz") ]]; then
+#     bosh create-release --tarball release.tgz
+#   fi
 
-  bosh_release_path="$(realpath "$(find . -maxdepth 1 -name "*.tgz")")"
-popd > /dev/null
+#   bosh_release_path="$(realpath "$(find . -maxdepth 1 -name "*.tgz")")"
+# popd > /dev/null
 
-export bosh_release_path
+export bosh_release_path="$(realpath "$(find "$src_dir/../" -maxdepth 1 -name "*.tgz")")"
 
 cd ${BOSH_DEPLOYMENT_PATH}
 

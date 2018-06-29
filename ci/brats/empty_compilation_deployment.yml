@@ -1,0 +1,20 @@
+---
+
+name: compilation-workspace
+
+releases:
+- name: bosh
+  version: latest
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+instance_groups: []
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  canary_watch_time: 1000-90000
+  update_watch_time: 1000-90000

@@ -50,5 +50,19 @@ apt-get update
 apt-get install -y mysql-client
 apt-get install -y postgresql-client
 
+pushd "${src_dir}/bosh-src"
+  bosh create-release --tarball release.tgz
+popd
+
+bosh upload-release ${src_dir}/bosh-src/release.tgz
+bosh upload-stemcell ${src_dir}/stemcell/*.tgz
+bosh -d compilation-workspace deploy "${src_dir}/bosh-src/ci/brats/empty_compilation_deployment.yml" -n
+
+
+stemcell_version=$(cat ${src_dir}/stemcell/version)
+bosh_release_version=$(bosh releases --column=version | awk '{print $1}' | tr -d '*')
+bosh -d compilation-workspace export-release bosh/${bosh_release_version} ${STEMCELL_OS}/${stemcell_version}
+
+
 cd bosh-src
 scripts/test-brats
