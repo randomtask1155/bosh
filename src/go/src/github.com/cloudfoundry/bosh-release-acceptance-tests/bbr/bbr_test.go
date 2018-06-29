@@ -1,4 +1,4 @@
-package brats_test
+package bbr_test
 
 import (
 	"io/ioutil"
@@ -17,7 +17,7 @@ import (
 	"github.com/onsi/gomega/gexec"
 )
 
-var _ = XDescribe("Bosh Backup and Restore BBR", func() {
+var _ = Describe("Bosh Backup and Restore BBR", func() {
 	var (
 		backupDir             []string
 		startInnerBoshOptions []string
