@@ -69,6 +69,20 @@ var _ = AfterSuite(func() {
 	Eventually(session, time.Minute).Should(gexec.Exit(0))
 })
 
+var _ = AfterEach(func() {
+	session := bosh("deployments", "--column=name")
+	Eventually(session, 1*time.Minute).Should(gexec.Exit())
+	deployments := strings.Split(string(session.Out.Contents()), "\n")
+
+	for _, deploymentName := range deployments {
+		if deploymentName == "" {
+			continue
+		}
+		session := bosh("delete-deployment", "-n", "-d", deploymentName)
+		Eventually(session, 5*time.Minute).Should(gexec.Exit())
+	}
+})
+
 func assertEnvExists(envName string) string {
 	val, found := os.LookupEnv(envName)
 	if !found {

@@ -17,7 +17,7 @@ import (
 var _ = Describe("Blobstore", func() {
 	Context("SSL", func() {
 		testDeployment := func(allowHttp bool, schema string, errorCode int) {
-			By("specifying blobstore.allow_http and agent.env.bosh.blobstores")
+			By(fmt.Sprintf("specifying blobstore.allow_http (%v) and agent.env.bosh.blobstores (%v)", allowHttp, schema))
 			startInnerBosh(
 				fmt.Sprintf("-o %s", assetPath("op-blobstore-https.yml")),
 				fmt.Sprintf("-v allow_http=%t", allowHttp),
@@ -40,7 +40,7 @@ var _ = Describe("Blobstore", func() {
 		)
 
 		DescribeTable("with allow_http false", testDeployment,
-			FEntry("does not allow http connections", false, "http", 1),
+			Entry("does not allow http connections", false, "http", 1),
 			Entry("allows https connections", false, "https", 0),
 		)
 	})
