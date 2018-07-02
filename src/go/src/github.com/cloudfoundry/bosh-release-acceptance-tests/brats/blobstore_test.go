@@ -40,7 +40,7 @@ var _ = Describe("Blobstore", func() {
 		)
 
 		DescribeTable("with allow_http false", testDeployment,
-			Entry("does not allow http connections", false, "http", 1),
+			FEntry("does not allow http connections", false, "http", 1),
 			Entry("allows https connections", false, "https", 0),
 		)
 	})
