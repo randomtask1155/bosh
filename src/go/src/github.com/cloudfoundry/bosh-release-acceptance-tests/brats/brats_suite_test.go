@@ -70,11 +70,13 @@ var _ = AfterSuite(func() {
 })
 
 var _ = AfterEach(func() {
+	By("cleanin up deployments")
 	session := bosh("deployments", "--column=name")
 	Eventually(session, 1*time.Minute).Should(gexec.Exit())
-	deployments := strings.Split(string(session.Out.Contents()), "\n")
+	deployments := strings.Fields(string(session.Out.Contents()))
 
 	for _, deploymentName := range deployments {
+		By(fmt.Sprintf("deleting deployment %v", deploymentName))
 		if deploymentName == "" {
 			continue
 		}
